@@ -17,17 +17,11 @@ class ContractTypeExtension extends AbstractExtension
     {
         return [
             new TwigFunction('get_contract_types', [$this, 'getContractTypes']),
-            new TwigFunction('get_contract_type', [$this, 'getContractType']),
         ];
     }
 
     public function getContractTypes(array $criteria = []): array
     {
         return $this->entityManager->getRepository(ContractType::class)->findBy($criteria);
-    }
-
-    public function getContractType(int $id): ?ContractType
-    {
-        return $this->entityManager->getRepository(ContractType::class)->find($id);
     }
 }
