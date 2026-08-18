@@ -1,13 +1,13 @@
 <?php
 
-namespace Aintreallydown\ContractTypeBundle\Form;
+namespace aintreallydown\ContractTypeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Tenant;
-use Aintreallydown\ContractTypeBundle\Service\ContractTypeService;
+use aintreallydown\ContractTypeBundle\Service\ContractTypeService;
 
 class ContractTypeFormType extends AbstractType
 {

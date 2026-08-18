@@ -1,6 +1,6 @@
 <?php
 
-namespace Aintreallydown\ContractTypeBundle\Service;
+namespace aintreallydown\ContractTypeBundle\Service;
 
 use App\Entity\ContractType;
 use Doctrine\ORM\EntityManagerInterface;
