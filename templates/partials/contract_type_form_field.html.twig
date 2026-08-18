@@ -4,16 +4,21 @@
 
     {% for contractType in get_contract_types() %}
         {% set contractTypeOptions = contractTypeOptions|merge([{ 'value': contractType.value, 'label': contractType.label }]) %}
+        {{dump(contractTypeOptions)}}
+    {% endfor %}
+    {% for contractType in get_contract_types(fr) %}
+        {% set contractTypeOptionsWithFR = contractTypeOptions|merge([{ 'value': contractType.value, 'label': contractType.label }]) %}
+        {{dump(contractTypeOptionsWithFR)}}
     {% endfor %}
 
-    <zb-select
+    {# <zb-select
         class="prevent-selected-order display-top"
         name="{{ field_name(bundleForm.contract) }}" 
         value="{{ field_value(bundleForm.contract) }}"
         placeholder="{{ 'bundle.contract_type.form.placeholder'|trans }}"
         options="{{contractTypeOptions}}" 
         required
-    ></zb-select>
+    ></zb-select> #}
 
 
 
