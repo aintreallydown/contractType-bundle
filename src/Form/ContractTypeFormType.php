@@ -1,28 +1,40 @@
 <?php
 
-namespace aintreallydown\ContractTypeBundle\Form;
+namespace Aintreallydown\ContractTypeBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Tenant;
+use Aintreallydown\ContractTypeBundle\Service\ContractTypeService;
 
 class ContractTypeFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function __construct(
+        private ContractTypeService $contractTypeService,
+    ) {}
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $contractChoices = $this->contractTypeService->getContractChoices($options['criteria']);
+
         $builder
             ->add('contract', ChoiceType::class, [
                 'mapped' => false,
+                'label' => false,
+                'choices' => $contractChoices,
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Tenant::class,
             'method' => 'PATCH',
+            'criteria' => null,
         ]);
+        $resolver->setRequired(['criteria']);
+        $resolver->setAllowedTypes('criteria', ['string', 'null']);
     }
 }
