@@ -11,7 +11,7 @@
         name="{{ field_name(bundleForm.contract) }}" 
         value="{{ field_value(bundleForm.contract) }}"
         placeholder="{{ 'bundle.contract_type.form.placeholder'|trans }}"
-        options="{{contractTypeOptionsWithLocal|json_encode()|raw}}" 
+        options="{{contractTypeOptionsWithLocal|json_encode|e('html_attr') }}" 
         required
     ></zb-select>
 
