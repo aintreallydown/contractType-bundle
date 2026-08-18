@@ -20,8 +20,8 @@ class ContractTypeExtension extends AbstractExtension
         ];
     }
 
-    public function getContractTypes(array $criteria = []): array
+    public function getContractTypes(string $criteria)
     {
-        return $this->entityManager->getRepository(ContractType::class)->findBy($criteria);
+        return $this->entityManager->getRepository(ContractType::class)->findBy(['local' => $criteria]);
     }
 }
