@@ -19,7 +19,7 @@ class ContractTypeService
 
         $choices = [];
         foreach ($contractTypes as $contractType) {
-            $choices[$contractType->getName()] = $contractType->getId();
+            $choices[$contractType->getLabel()] = $contractType->getValue();
         }
 
         return $choices;
