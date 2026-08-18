@@ -1,20 +1,19 @@
 {% if field_value(form.position) == 1 %}
 
-    {% set contractTypeOptions = [] %}
+    {% set contractTypeOptionsWithLocal = [] %}
 
     {% for contractType in get_contract_types(local) %}
-        {% set contractTypeOptionsWithLocal = contractTypeOptions|merge([{ 'value': contractType.value, 'label': contractType.label }]) %}
-        {{dump(contractTypeOptionsWithLocal)}}
+        {% set contractTypeOptionsWithLocal = contractTypeOptionsWithLocal|merge([{ 'value': contractType.value, 'label': contractType.label }]) %}
     {% endfor %}
 
-    {# <zb-select
+    <zb-select
         class="prevent-selected-order display-top"
         name="{{ field_name(bundleForm.contract) }}" 
         value="{{ field_value(bundleForm.contract) }}"
         placeholder="{{ 'bundle.contract_type.form.placeholder'|trans }}"
-        options="{{contractTypeOptions}}" 
+        options="{{contractTypeOptionsWithLocal|json_encode()|raw}}" 
         required
-    ></zb-select> #}
+    ></zb-select>
 
 
 
