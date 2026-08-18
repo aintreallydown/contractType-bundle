@@ -13,7 +13,7 @@ class ContractTypeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('contractType', TextType::class, [
+            ->add('contract', TextType::class, [
                 'mapped' => false,
             ]);
     }
