@@ -17,7 +17,7 @@ class ContractTypeFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $contractChoices = $this->contractTypeService->getContractChoices($options['criteria']);
+        $contractChoices = $this->contractTypeService->getContractChoices($options['language']);
 
         $builder
             ->add('contract', ChoiceType::class, [
@@ -32,9 +32,9 @@ class ContractTypeFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Tenant::class,
             'method' => 'PATCH',
-            'criteria' => null,
+            'language' => null,
         ]);
-        $resolver->setRequired(['criteria']);
-        $resolver->setAllowedTypes('criteria', ['string', 'null']);
+        $resolver->setRequired(['language']);
+        $resolver->setAllowedTypes('language', ['string', 'null']);
     }
 }

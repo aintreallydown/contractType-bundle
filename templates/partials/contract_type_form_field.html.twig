@@ -1,6 +1,7 @@
 {% if field_value(form.position) == 1 %}
 
     <zb-select
+
         class="prevent-selected-order display-top"
         name="{{ field_name(bundleForm.contract) }}"
         value="{{ field_value(bundleForm.contract) }}"
@@ -10,6 +11,7 @@
             'label': c.label
         })|json_encode(constant('JSON_UNESCAPED_UNICODE'))|e('html_attr') }}"
         required
+        
     ></zb-select>
 
 {% endif %}

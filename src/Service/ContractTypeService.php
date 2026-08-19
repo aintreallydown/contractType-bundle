@@ -11,14 +11,18 @@ class ContractTypeService
         private EntityManagerInterface $entityManager,
     ) {}
 
-    public function getContractChoices(string $criteria): array
+    public function getContractChoices(string $language): array
     {
-        $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy([
-            'local' => $criteria,
-        ]);
+        $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
+            [
+                'local' => $language,
+            ]
+        );
 
         $choices = [];
+
         foreach ($contractTypes as $contractType) {
+
             $choices[$contractType->getLabel()] = $contractType->getValue();
         }
 
