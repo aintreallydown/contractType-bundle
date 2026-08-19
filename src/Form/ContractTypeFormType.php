@@ -33,7 +33,9 @@ class ContractTypeFormType extends AbstractType
             'data_class' => Tenant::class,
             'method' => 'PATCH',
             'language' => null,
+            'csrf_token_id' => 'contract_type_form',
         ]);
+
         $resolver->setRequired(['language']);
         $resolver->setAllowedTypes('language', ['string', 'null']);
     }
