@@ -1,19 +1,15 @@
 {% if field_value(form.position) == 1 %}
 
-    {% if bundleForm %}
-        <zb-select
-            class="prevent-selected-order display-top"
-            name="{{ field_name(bundleForm.contract) }}"
-            value="{{ field_value(bundleForm.contract) }}"
-            placeholder="{{ 'bundle.contract_type.form.placeholder'|trans }}"
-            options="{{ bundleForm.contract.vars.choices|map(c => {
-                'value': c.value, 
-                'label': c.label
-            })|json_encode(constant('JSON_UNESCAPED_UNICODE'))|e('html_attr') }}"
-            required
-        ></zb-select>
-
-        {{ form_widget(bundleForm._token) }}
-    {% endif %}
+    <zb-select
+        class="prevent-selected-order display-top"
+        name="{{ field_name(form.contract) }}"
+        value="{{ field_value(form.contract) }}"
+        placeholder="{{ 'bundle.contract_type.form.placeholder'|trans }}"
+        options="{{ form.contract.vars.choices|map(c => {
+            'value': c.value, 
+            'label': c.label
+        })|json_encode(constant('JSON_UNESCAPED_UNICODE'))|e('html_attr') }}"
+        required
+    ></zb-select>
 
 {% endif %}
