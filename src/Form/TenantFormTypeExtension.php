@@ -24,10 +24,14 @@ class TenantFormTypeExtension extends AbstractTypeExtension
     {
         $contractChoices = $this->contractTypeService->getContractChoices($options['language'] ?? null);
 
+        $tenant = $builder->getData();
+        $currentContract = $tenant?->getExtrafields()['contract'] ?? null;
+
         $builder->add('contract', ChoiceType::class, [
             'mapped' => false,
             'label' => false,
             'choices' => $contractChoices,
+            'data' => $currentContract,
         ]);
     }
 
