@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use aintreallydown\ContractTypeBundle\Service\ContractTypeService;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class TenantFormTypeExtension extends AbstractTypeExtension
 {
@@ -33,6 +35,18 @@ class TenantFormTypeExtension extends AbstractTypeExtension
             'choices' => $contractChoices,
             'data' => $currentContract,
         ]);
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+
+            $form = $event->getForm();
+            $tenant = $form->getData();
+
+            $extrafields = $tenant->getExtrafields() ?? [];
+            $extrafields['contract'] = $form->get('contract')->getData();
+
+
+            $tenant->setExtrafields($extrafields);
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
