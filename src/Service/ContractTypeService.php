@@ -11,7 +11,7 @@ class ContractTypeService
         private EntityManagerInterface $entityManager,
     ) {}
 
-    public function getContractChoices(string $language): array
+    public function getContractChoices(?string $language): array
     {
         $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
             [
