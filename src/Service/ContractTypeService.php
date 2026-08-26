@@ -2,7 +2,7 @@
 
 namespace aintreallydown\ContractTypeBundle\Service;
 
-use App\Entity\ContractType;
+use aintreallydown\ContractTypeBundle\Entity\ContractType;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ContractTypeService
