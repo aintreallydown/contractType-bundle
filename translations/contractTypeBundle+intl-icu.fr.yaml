@@ -1,0 +1,4 @@
+bundle:
+  contract_type:
+    form:
+      placeholder: 'Type de contrat'
