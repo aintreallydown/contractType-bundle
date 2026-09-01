@@ -48,6 +48,8 @@ class ContractTypeService
             $choices[$contractType->getLabel()] = $contractType->getValue();
         }
 
+        dd($choices);
+
         return $choices;
     }
 }
