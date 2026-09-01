@@ -17,24 +17,29 @@ class ContractTypeService
 
     public function getContractChoices(): array
     {
-        $contractTypes =
-            $this->entityManager->getRepository(ContractType::class)->findBy(
-                [
-                    'local' => $this->request->getCurrentRequest()->getLocale(),
-                ]
-            ) ??
-            $this->entityManager->getRepository(ContractType::class)->findBy(
+        $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
+            [
+                'local' => $this->request->getCurrentRequest()->getLocale(),
+            ]
+        );
+
+        if (empty($contractTypes) || !$contractTypes) {
+
+            $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
                 [
                     'local' => 'en',
                 ]
-            ) ??
-            $this->entityManager->getRepository(ContractType::class)->findBy(
+            );
+        }
+
+        if (empty($contractTypes) || !$contractTypes) {
+
+            $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
                 [
                     'local' => $this->params->get('default_locale'),
                 ]
-            )
-        ;
-
+            );
+        }
 
         $choices = [];
 
