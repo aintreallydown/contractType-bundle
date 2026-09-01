@@ -26,7 +26,9 @@ class TenantFormTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
-        $builder->add('contract', IntegerType::class);
+        $builder->add('contract', IntegerType::class, [
+            'mapped' => false,
+        ]);
 
 
 
