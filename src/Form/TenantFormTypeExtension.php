@@ -24,7 +24,7 @@ class TenantFormTypeExtension extends AbstractTypeExtension
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $contractChoices = $this->contractTypeService->getContractChoices($options['language'] ?? null);
+        $contractChoices = $this->contractTypeService->getContractChoices();
 
         $tenant = $builder->getData();
         $currentContract = $tenant?->getExtrafields()['contract'] ?? null;

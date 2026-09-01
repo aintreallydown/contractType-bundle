@@ -13,15 +13,14 @@ class ContractTypeService
         private RequestStack $request
     ) {}
 
-    public function getContractChoices(?string $language): array
+    public function getContractChoices(): array
     {
         $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
             [
-                'local' => $language,
+                'local' => $this->request->getCurrentRequest()->getLocale(),
             ]
         );
 
-        dd($this->request->getCurrentRequest()->getLocale());
 
         $choices = [];
 
