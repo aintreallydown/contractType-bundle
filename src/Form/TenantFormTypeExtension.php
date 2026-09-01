@@ -48,12 +48,6 @@ class TenantFormTypeExtension extends AbstractTypeExtension
             $tenant->setExtrafields($extrafields);
         });
     }
+    
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'language' => null,
-        ]);
-        $resolver->setAllowedTypes('language', ['string', 'null']);
-    }
 }

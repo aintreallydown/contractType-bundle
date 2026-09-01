@@ -15,7 +15,7 @@ class ContractTypeService
         private ParameterBagInterface $params,
     ) {}
 
-    public function getContractChoices(): array
+    public function getContractChoices(): string
     {
         $contractTypes = $this->entityManager->getRepository(ContractType::class)->findBy(
             [
@@ -48,6 +48,9 @@ class ContractTypeService
             $choices[$contractType->getLabel()] = $contractType->getValue();
         }
 
-        return $choices;
+        dump(json_encode($choices, JSON_UNESCAPED_UNICODE));
+
+        return json_encode($choices, JSON_UNESCAPED_UNICODE);
+
     }
 }
