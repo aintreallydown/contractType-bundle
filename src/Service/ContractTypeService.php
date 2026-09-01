@@ -45,10 +45,14 @@ class ContractTypeService
 
         foreach ($contractTypes as $contractType) {
 
-            $choices[$contractType->getLabel()] = $contractType->getValue();
+            $choices[] = [
+                'label' => $contractType->getLabel(),
+                'value' => $contractType->getValue(),
+            ];
+
         }
 
-        dd($choices);
+
 
         return $choices;
     }
