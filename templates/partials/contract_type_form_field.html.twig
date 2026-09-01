@@ -5,7 +5,10 @@
         name="{{ field_name(form.contract) }}"
         value="{{ field_value(form.contract) }}"
         placeholder="{{ 'bundle.contract_type.form.placeholder'|trans({}, 'contractTypeBundle') }}"
-        options="{{ form.contract.vars.choices|json_encode(constant('JSON_UNESCAPED_UNICODE'))|e('html_attr') }}"
+        options="{{ form.contract.vars.choices|map(c => {
+            'value': c.value, 
+            'label': c.label
+        })|json_encode(constant('JSON_UNESCAPED_UNICODE'))|e('html_attr') }}"
         required
     ></zb-select>
 
