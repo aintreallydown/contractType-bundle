@@ -38,5 +38,10 @@ class ContractTypeExtension extends Extension implements PrependExtensionInterfa
                 ],
             ],
         ]);
+        $container->prependExtensionConfig('twig', [
+            'paths' => [
+                __DIR__ . '/../../templates' => 'ContractTypeBundle',
+            ],
+        ]);
     }
 }
