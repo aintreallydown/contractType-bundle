@@ -61,9 +61,10 @@ class TenantFormTypeExtension extends AbstractTypeExtension
     {
         $contractChoices = $this->contractTypeService->getContractChoices();
 
-        $view->vars['choices'] = json_encode($contractChoices, JSON_UNESCAPED_UNICODE);
-        dump($contractChoices);
-        dd(json_encode($contractChoices, JSON_UNESCAPED_UNICODE));
+
+        $choices = json_encode($contractChoices, JSON_UNESCAPED_UNICODE);
+        $view->vars['choices'] = htmlspecialchars($choices, ENT_QUOTES, 'UTF-8');
+        
 
     }
 
