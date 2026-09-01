@@ -4,10 +4,9 @@ namespace aintreallydown\ContractTypeBundle\Form;
 
 use App\Form\TenantFormType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use aintreallydown\ContractTypeBundle\Service\ContractTypeService;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,22 +24,17 @@ class TenantFormTypeExtension extends AbstractTypeExtension
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $contractChoices = $this->contractTypeService->getContractChoices();
 
-        $builder->add('contract', IntegerType::class, [
+        $tenant = $builder->getData();
+        $currentContract = $tenant?->getExtrafields()['contract'] ?? null;
+
+        $builder->add('contract', ChoiceType::class, [
             'mapped' => false,
+            'label' => false,
+            'choices' => $contractChoices,
+            'data' => $currentContract,
         ]);
-
-
-
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
-
-            $form = $event->getForm();
-            $tenant = $event->getData();
-
-            $currentContract = $tenant?->getExtrafields()['contract'] ?? null;
-
-            $form->get('contract')->setData($currentContract);
-        });
 
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
 
@@ -53,18 +47,7 @@ class TenantFormTypeExtension extends AbstractTypeExtension
 
             $tenant->setExtrafields($extrafields);
         });
-
-        
     }
-
-    public function buildView(FormView $view, FormInterface $form, array $options): void
-    {
-        $contractChoices = $this->contractTypeService->getContractChoices();
-
-        $view->vars['choices'] = json_encode($contractChoices, JSON_UNESCAPED_UNICODE);
-        
-
-    }
-
+    
 
 }
